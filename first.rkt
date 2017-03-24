@@ -21,9 +21,22 @@
 x
 
 (define (ff wrong_string)
-  (
-   if (string? wrong_string) (string-length wrong_string) (string-length (number->string wrong_string))
-  ))
+(
+   if (string? wrong_string)
+      (string-length wrong_string) 
+   (
+      if (number? wrong_string)   
+         (string-length (number->string wrong_string)) 
+         (
+          if (bool? wrong_string)
+             (string-length (bool->string wrong_string))
+         )
+   )
+))
 
-(ff "1234567")
-(ff 1234567)
+(define one (ff "1234567"))
+(define two (ff 1234567))
+(define three (ff #t))
+one
+two
+three
